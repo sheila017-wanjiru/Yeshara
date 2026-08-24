@@ -19,5 +19,9 @@
     "paths": { "@/*": ["./*"] }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  // sanity/ holds schema definitions for a Sanity Studio that lives in
+  // its own project. They import from `sanity`, which is not a
+  // dependency of this app, so they are documentation here rather than
+  // compiled source.
+  "exclude": ["node_modules", "sanity"]
 }
