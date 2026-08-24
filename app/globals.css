@@ -212,10 +212,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .marquee-lane:hover .marquee-track,
 .marquee-lane:focus-within .marquee-track{animation-play-state:paused}
 
-/* ══ SCROLL REVEAL — one 20px rise and fade, once per element ══ */
-.rv{opacity:0;transform:translateY(20px);
-  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-.rv.in{opacity:1;transform:none}
+/* ══ SCROLL REVEAL — one 20px rise and fade, once per element ══
+   The hidden start state is scoped to html[data-js="on"], set by an
+   inline script before first paint. With JavaScript disabled the rule
+   never applies, so every revealed section renders fully visible
+   instead of sitting at opacity:0 forever. */
+html[data-js="on"] .rv{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);
+}
+html[data-js="on"] .rv.in{opacity:1;transform:none}
 
 /* ══ HERO PIPELINE ══ */
 @keyframes yesh-drop{
@@ -293,7 +299,7 @@ input:-moz-autofill,textarea:-moz-autofill{
   html,body{background:#fff !important;color:#061110 !important}
   [data-print="hide"]{display:none !important}
   .marquee-lane,.marquee-track{display:none !important}
-  .rv{opacity:1 !important;transform:none !important}
+  html[data-js="on"] .rv{opacity:1 !important;transform:none !important}
   section,article{background:#fff !important;background-image:none !important;break-inside:avoid}
   *{box-shadow:none !important;text-shadow:none !important}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:.75em;color:#4E5D5C}
@@ -308,7 +314,7 @@ input:-moz-autofill,textarea:-moz-autofill{
     animation-iteration-count:1 !important;
     transition-duration:.001ms !important;
   }
-  .rv{opacity:1;transform:none}
+  html[data-js="on"] .rv{opacity:1;transform:none}
   .marquee-lane{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
   .marquee-track{animation:none;width:auto}
   html{scroll-behavior:auto}

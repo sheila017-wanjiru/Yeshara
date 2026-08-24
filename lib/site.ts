@@ -14,7 +14,7 @@ export const SITE = {
    * app.yeshara.network — a different subdomain — which split ranking
    * signals across two hosts. Everything canonicalises here.
    */
-  url: "https://www.yeshara.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.yeshara.com",
   description:
     "Yeshara Tokens Limited converts real estate and financial instruments into secure, tradeable blockchain-based tokens, with title held by an independent trustee.",
   email: "info@yeshara.network",

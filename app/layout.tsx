@@ -43,6 +43,17 @@ export default function RootLayout({
       lang="en"
       className={`${figtree.variable} ${manrope.variable} ${plexMono.variable}`}
     >
+      <head>
+        {/* Marks the document as JavaScript-capable before first paint,
+            which is what gates the scroll-reveal start state. Without
+            it every .rv block renders fully visible rather than sitting
+            at opacity:0 forever. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.dataset.js="on"`,
+          }}
+        />
+      </head>
       <body>
         <a
           href="#main"
