@@ -203,6 +203,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .prose th,.prose td{text-align:left;padding:var(--s3) var(--s4);border-bottom:1px solid var(--border);color:var(--tx-2);vertical-align:top}
 .prose th{color:var(--tx-1);font-family:var(--font-display);font-weight:700}
 
+/* Below-the-fold sections skip layout and paint until they approach the
+   viewport. The intrinsic size keeps the scrollbar honest so this costs
+   nothing in layout shift. Content stays in the DOM — this is a
+   rendering hint, not a visibility change, so crawlers and find-in-page
+   are unaffected. */
+.defer-paint{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 720px;
+}
+
 /* ══ ELEVATION — one lit top edge per raised surface ══ */
 .elev{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 .elev-h:hover{box-shadow:inset 0 1px 0 rgba(166,225,226,.12),0 18px 44px -28px #000}

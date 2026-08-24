@@ -39,7 +39,7 @@ export function NewsletterForm() {
           autoComplete="email"
           placeholder="Email address"
           aria-invalid={state.errors?.email ? true : undefined}
-          className="min-w-0 flex-1 rounded-[10px] border border-border-2 bg-bg px-[14px] py-[11px] font-body text-[.875rem] text-tx placeholder:text-tx-3 focus:border-tq-500 focus:outline-none"
+          className="min-w-0 flex-1 rounded-[10px] border border-border-2 bg-bg px-[14px] py-[11px] font-body text-[.875rem] text-tx placeholder:text-tx-3 focus:border-tq-500"
         />
         <SubmitButton />
       </div>

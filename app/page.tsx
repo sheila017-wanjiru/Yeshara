@@ -203,7 +203,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ LIFECYCLE ═══ */}
-      <Section band labelledBy="lifecycle-heading" id="lifecycle">
+      <Section band labelledBy="lifecycle-heading" id="lifecycle" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="lifecycle-heading"
@@ -220,7 +220,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ ROLES ═══ */}
-      <Section labelledBy="roles-heading">
+      <Section labelledBy="roles-heading" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="roles-heading"
@@ -250,7 +250,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ COMPARISON ═══ */}
-      <Section band labelledBy="comparison-heading">
+      <Section band labelledBy="comparison-heading" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="comparison-heading"
@@ -268,7 +268,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ INFRASTRUCTURE ═══ */}
-      <Section labelledBy="infra-heading" id="infrastructure">
+      <Section labelledBy="infra-heading" id="infrastructure" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="infra-heading"
@@ -289,7 +289,7 @@ export default function HomePage() {
       <PartnerBelt />
 
       {/* ═══ COMPLIANCE ═══ */}
-      <Section labelledBy="compliance-heading" id="compliance">
+      <Section labelledBy="compliance-heading" id="compliance" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="compliance-heading"
@@ -312,7 +312,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ ECOSYSTEM ═══ */}
-      <Section band labelledBy="ecosystem-heading">
+      <Section band labelledBy="ecosystem-heading" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="ecosystem-heading"
@@ -330,7 +330,7 @@ export default function HomePage() {
       </Section>
 
       {/* ═══ FAQ ═══ */}
-      <Section labelledBy="faq-heading" id="faq">
+      <Section labelledBy="faq-heading" id="faq" className="defer-paint">
         <ScrollReveal>
           <SectionHeader
             id="faq-heading"

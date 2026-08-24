@@ -11,7 +11,8 @@
     "verify:ssr": "bash scripts/verify-ssr.sh",
     "verify:a11y": "node scripts/a11y.mjs",
     "verify:print": "node scripts/print-check.mjs",
-    "verify:lighthouse": "node scripts/lighthouse.mjs"
+    "verify:lighthouse": "node scripts/lighthouse.mjs",
+    "verify:forms": "node scripts/forms-check.mjs"
   },
   "dependencies": {
     "next": "^15.5.23",

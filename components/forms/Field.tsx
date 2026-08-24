@@ -3,10 +3,14 @@
 import type { ReactNode } from "react";
 import { HONEYPOT_FIELD } from "@/lib/validation";
 
+// The focus ring is never suppressed. A border colour change on its own
+// is a weak focus indicator, so the global :focus-visible outline (2px
+// solid tq-300, 3px offset) is left to apply and the border shift is an
+// additional cue rather than the only one.
 const CONTROL =
   "w-full rounded-[10px] border border-border-2 bg-bg-2 px-[15px] py-[13px] font-body " +
   "text-[.9375rem] text-tx transition-colors duration-200 placeholder:text-tx-3 " +
-  "focus:border-tq-500 focus:outline-none";
+  "focus:border-tq-500";
 
 export function Field({
   id,
