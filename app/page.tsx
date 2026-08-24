@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { Wrap, Section, SectionHeader, SourceNote } from "@/components/primitives/Section";
-import { ButtonLink } from "@/components/primitives/Button";
+import { ButtonLink, TextLink } from "@/components/primitives/Button";
 import { Chip, Placeholder } from "@/components/primitives/Chip";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TokenizationPipeline } from "@/components/motion/TokenizationPipeline";
@@ -13,7 +13,6 @@ import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { InfrastructureGrid, ComplianceGrid } from "@/components/content/InfraCompliance";
 import { PartnerBelt } from "@/components/content/PartnerBelt";
 import { ClosingCta } from "@/components/layout/ClosingCta";
-import { FaqJsonLd } from "@/components/seo/JsonLd";
 import {
   HouseIcon,
   PulseIcon,
@@ -343,10 +342,14 @@ export default function HomePage() {
             }
           />
         </ScrollReveal>
-        <FaqAccordion items={FAQ} />
-        <FaqJsonLd
-          items={FAQ.map((f) => ({ question: f.question, answer: f.answer }))}
-        />
+        {/* A subset here; the full set lives on /tokenization, which
+            carries the single FAQPage markup for the site. Repeating
+            all ten in both places would be duplicate content competing
+            with itself. */}
+        <FaqAccordion items={FAQ.slice(0, 5)} />
+        <ScrollReveal className="mt-s6">
+          <TextLink href="/tokenization#faq">Read all questions</TextLink>
+        </ScrollReveal>
       </Section>
 
       <ClosingCta />
