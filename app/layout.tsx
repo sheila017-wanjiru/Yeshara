@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { BrandDefs } from "@/components/layout/Logo";
+import { Analytics } from "@/components/layout/Analytics";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <Analytics />
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </body>
