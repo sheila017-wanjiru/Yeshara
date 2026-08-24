@@ -118,7 +118,7 @@ export function EcosystemDiagram() {
           })}
 
           <g aria-hidden="true">
-            <circle cx={CX} cy={CY} r={62} fill="#0B1314" stroke="var(--tq-300)" strokeOpacity=".5" />
+            <circle cx={CX} cy={CY} r={62} fill="var(--surface)" stroke="var(--tq-300)" strokeOpacity=".5" />
             <circle cx={CX} cy={CY} r={74} fill="none" stroke="var(--tq-500)" strokeOpacity=".2" />
             <text
               x={CX}

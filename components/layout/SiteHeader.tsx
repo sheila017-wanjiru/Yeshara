@@ -66,7 +66,7 @@ export function SiteHeader() {
           <div
             className={`flex h-[var(--nav-h)] items-center rounded-nav border py-0 pl-s5 pr-[10px] backdrop-blur-[20px] backdrop-saturate-150 transition-[background-color,border-color,box-shadow] duration-300 ${
               stuck
-                ? "border-border-2 bg-[rgba(4,5,6,.94)] shadow-[0_16px_50px_-26px_#000]"
+                ? "border-border-2 bg-[rgba(4,5,6,.94)] shadow-[0_16px_50px_-26px_var(--bg)]"
                 : "border-border-1 bg-[rgba(9,11,12,.76)]"
             }`}
           >

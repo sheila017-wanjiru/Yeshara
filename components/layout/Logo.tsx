@@ -24,6 +24,12 @@ export function BrandDefs() {
  * The cowrie shell — East Africa's original currency, a store of value
  * that moved between hands and needed no bank. It is the strongest
  * brand asset Yeshara owns.
+ *
+ * COLOUR EXCEPTION: the hex values inside the mark are artwork, not
+ * theme. The logo must render identically wherever it is placed —
+ * including on a white deck slide, a letterhead or an invoice — so it
+ * deliberately does not follow the page's colour tokens. Only the
+ * wordmark changes between lockups.
  */
 export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
   return (

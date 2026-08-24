@@ -69,14 +69,14 @@ export function ComparisonTable() {
             <span className="flex items-center gap-s3 border-l border-border-1 bg-tq-500/[.035] px-s4 py-s3 text-[.8438rem] text-tx max-md:border-l-0 sm:px-s5 md:py-s4 md:text-[.9rem]">
               <span
                 aria-hidden="true"
-                className="h-[14px] w-[14px] shrink-0 rounded-full bg-tq-500 shadow-[inset_0_0_0_3px_#000]"
+                className="h-[14px] w-[14px] shrink-0 rounded-full bg-tq-500 shadow-[inset_0_0_0_3px_var(--bg)]"
               />
               {row[1]}
             </span>
             <span className="flex items-center gap-s3 border-l border-border-1 px-s4 py-s3 text-[.8438rem] text-tx-2 sm:px-s5 md:py-s4 md:text-[.9rem]">
               <span
                 aria-hidden="true"
-                className="h-[14px] w-[14px] shrink-0 rounded-full bg-surface-3 shadow-[inset_0_0_0_3px_#000]"
+                className="h-[14px] w-[14px] shrink-0 rounded-full bg-surface-3 shadow-[inset_0_0_0_3px_var(--bg)]"
               />
               {row[2]}
             </span>

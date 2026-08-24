@@ -307,6 +307,51 @@ input:-moz-autofill,textarea:-moz-autofill{
     --on-tq:#fff;--warn:#7A5310;
   }
   html,body{background:#fff !important;color:#061110 !important}
+
+  /* Hard floor on ink. On screen the grey ramp carries hierarchy; on
+     paper it only costs legibility, and several of those greys land
+     between 2:1 and 3.5:1 on white. Everything prints as ink, and
+     hierarchy comes from the size and weight that survive printing
+     anyway. This is deliberately blunt: the requirement is that a PDF
+     of this site is readable, not that it looks like the screen. */
+  *:not([class*="border-dashed"]):not([class*="border-dashed"] *){
+    color:var(--ink) !important;
+  }
+
+  /* Components carrying their own fill print as outlined labels — a
+     filled teal button would otherwise be white-on-white. */
+  a[class*="bg-tq-"],
+  button[class*="bg-tq-"],
+  a[class*="bg-white/"],
+  button[type="submit"],
+  /* Any element pairing a teal fill with on-teal text — selection
+     ticks and state indicators included. */
+  [class*="bg-tq-"][class*="text-on-tq"]{
+    background:none !important;
+    background-image:none !important;
+    border:1px solid var(--ink) !important;
+  }
+
+  /* Status badges keep their word and their outline. The colour that
+     distinguished them on screen is redundant on paper — each is
+     already labelled, so nothing is conveyed by colour alone. */
+  [class*="rounded-chip"]{
+    background:none !important;
+    border-color:var(--ink-3) !important;
+  }
+
+  /* Placeholders stay conspicuous. An unfilled fact is the thing a
+     reader most needs to notice in a printed pack, so these keep an
+     amber ink dark enough to read on white (7.4:1). */
+  [class*="border-dashed"],
+  [class*="border-dashed"] *{
+    color:var(--warn-ink) !important;
+    border-color:var(--warn-ink) !important;
+    background:none !important;
+  }
+
+  /* Links stay identifiable without colour. */
+  a[href]{text-decoration:underline}
   [data-print="hide"]{display:none !important}
   .marquee-lane,.marquee-track{display:none !important}
   html[data-js="on"] .rv{opacity:1 !important;transform:none !important}

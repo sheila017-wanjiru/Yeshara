@@ -9,7 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "verify:ssr": "bash scripts/verify-ssr.sh",
-    "verify:a11y": "node scripts/a11y.mjs"
+    "verify:a11y": "node scripts/a11y.mjs",
+    "verify:print": "node scripts/print-check.mjs"
   },
   "dependencies": {
     "next": "^15.5.23",

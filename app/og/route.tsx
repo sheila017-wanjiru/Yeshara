@@ -5,6 +5,12 @@ export const runtime = "edge";
 /**
  * Per-route Open Graph images.
  *
+ * COLOUR EXCEPTION: this is the one place literal hex is correct.
+ * next/og renders through Satori in an isolated context with no
+ * stylesheet and no CSS custom properties, so var(--tq-300) resolves to
+ * nothing here. The values below are copies of the token ramp; if the
+ * ramp in app/globals.css changes, change them too.
+ *
  * The previous site used one 440x437 PNG as header logo, favicon, OG
  * image and Twitter card simultaneously, so every shared link looked
  * identical and none of them said what page it was. Each route now

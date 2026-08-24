@@ -79,7 +79,7 @@ export function TokenizationPipeline() {
 
   return (
     <figure
-      className="relative m-0 overflow-hidden rounded-[22px] border border-border-2 bg-[linear-gradient(168deg,#12201F_0%,#0A1314_38%,#020707_100%)] p-s5 shadow-[0_44px_100px_-50px_#000,inset_0_1px_0_rgba(166,225,226,.09)]"
+      className="relative m-0 overflow-hidden rounded-[22px] border border-border-2 bg-[linear-gradient(168deg,#12201F_0%,#0A1314_38%,#020707_100%)] p-s5 shadow-[0_44px_100px_-50px_var(--bg),inset_0_1px_0_rgba(166,225,226,.09)]"
       aria-label="Illustration: an asset structured, tokenized and listed"
     >
       <svg
