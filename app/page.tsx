@@ -1,11 +1,19 @@
 import { buildMetadata } from "@/lib/seo";
 import { Wrap, Section, SectionHeader, SourceNote } from "@/components/primitives/Section";
 import { ButtonLink } from "@/components/primitives/Button";
-import { Chip } from "@/components/primitives/Chip";
+import { Chip, Placeholder } from "@/components/primitives/Chip";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TokenizationPipeline } from "@/components/motion/TokenizationPipeline";
 import { StatGrid, StatTicker } from "@/components/content/StatGrid";
-import { PillarCard, AssetClassCard } from "@/components/content/Cards";
+import { PillarCard, AssetClassCard, RoleCard } from "@/components/content/Cards";
+import { LifecycleStepper } from "@/components/content/LifecycleStepper";
+import { ComparisonTable } from "@/components/content/ComparisonTable";
+import { EcosystemDiagram } from "@/components/content/EcosystemDiagram";
+import { FaqAccordion } from "@/components/content/FaqAccordion";
+import { InfrastructureGrid, ComplianceGrid } from "@/components/content/InfraCompliance";
+import { PartnerBelt } from "@/components/content/PartnerBelt";
+import { ClosingCta } from "@/components/layout/ClosingCta";
+import { FaqJsonLd } from "@/components/seo/JsonLd";
 import {
   HouseIcon,
   PulseIcon,
@@ -13,7 +21,14 @@ import {
   BuildingIcon,
   InstrumentIcon,
 } from "@/components/primitives/Icons";
-import { HEADLINE_STATS, MARKET_FIGURES_SOURCE, TICKET } from "@/content/facts";
+import {
+  HEADLINE_STATS,
+  MARKET_FIGURES_SOURCE,
+  PARTIES,
+  REGULATORY,
+  TICKET,
+} from "@/content/facts";
+import { COMPARISON_SOURCE, FAQ } from "@/content/tokenization";
 
 export const metadata = buildMetadata({
   title: "Converting real-world assets into secure, tradeable tokens",
@@ -187,6 +202,154 @@ export default function HomePage() {
           />
         </ScrollReveal>
       </Section>
+
+      {/* ═══ LIFECYCLE ═══ */}
+      <Section band labelledBy="lifecycle-heading" id="lifecycle">
+        <ScrollReveal>
+          <SectionHeader
+            id="lifecycle-heading"
+            eyebrow="The Tokenization Lifecycle"
+            title={
+              <>
+                Five phases, from <span className="tq">deal to secondary market</span>.
+              </>
+            }
+            lead="The institutional view of the same process. Each phase has its own documents, approvals and counterparties."
+          />
+        </ScrollReveal>
+        <LifecycleStepper />
+      </Section>
+
+      {/* ═══ ROLES ═══ */}
+      <Section labelledBy="roles-heading">
+        <ScrollReveal>
+          <SectionHeader
+            id="roles-heading"
+            eyebrow="Roles"
+            title={
+              <>
+                Three parties. <span className="tq">Separated on purpose.</span>
+              </>
+            }
+            lead="Yeshara does not hold your asset and does not hold your money. Title and investor funds sit with an independent trustee. That separation is the structure institutions ask about first."
+          />
+        </ScrollReveal>
+        <ScrollReveal className="mt-s8 grid gap-s4 lg:grid-cols-3">
+          {PARTIES.map((party) => (
+            <RoleCard
+              key={party.name}
+              name={party.name}
+              accent={party.accent}
+              role={party.role}
+              duties={party.duties}
+            />
+          ))}
+        </ScrollReveal>
+        <ScrollReveal>
+          <Placeholder className="mt-s5">[TRUSTEE NAME] · [CUSTODIAN] · [AUDITOR]</Placeholder>
+        </ScrollReveal>
+      </Section>
+
+      {/* ═══ COMPARISON ═══ */}
+      <Section band labelledBy="comparison-heading">
+        <ScrollReveal>
+          <SectionHeader
+            id="comparison-heading"
+            eyebrow="The Comparison"
+            title={
+              <>
+                How this differs from a <span className="tq">REIT</span>.
+              </>
+            }
+            lead="Kenyan investors already have a fractional property product. It is worth being precise about what changes and what does not."
+          />
+        </ScrollReveal>
+        <ComparisonTable />
+        <SourceNote>{COMPARISON_SOURCE}</SourceNote>
+      </Section>
+
+      {/* ═══ INFRASTRUCTURE ═══ */}
+      <Section labelledBy="infra-heading" id="infrastructure">
+        <ScrollReveal>
+          <SectionHeader
+            id="infra-heading"
+            eyebrow="Infrastructure"
+            title={
+              <>
+                Three layers <span className="tq">underneath every token</span>.
+              </>
+            }
+          />
+        </ScrollReveal>
+        <ScrollReveal>
+          <InfrastructureGrid />
+          <Placeholder className="mt-s5">[BLOCKCHAIN &amp; TOKEN STANDARD]</Placeholder>
+        </ScrollReveal>
+      </Section>
+
+      <PartnerBelt />
+
+      {/* ═══ COMPLIANCE ═══ */}
+      <Section labelledBy="compliance-heading" id="compliance">
+        <ScrollReveal>
+          <SectionHeader
+            id="compliance-heading"
+            eyebrow="Compliance First"
+            title={
+              <>
+                Built inside the perimeter, <span className="tq">not ahead of it</span>.
+              </>
+            }
+            lead={`${REGULATORY.admission} ${REGULATORY.caveat} — and we say so.`}
+          />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ComplianceGrid />
+          <Placeholder className="mt-s6">
+            [LICENSING STATUS — VASP ACT 2025 / VASP REGULATIONS 2026] ·
+            [COMPLIANCE PROVIDERS] · [SECURITY CERTIFICATIONS] · [AUDIT REPORTS]
+          </Placeholder>
+        </ScrollReveal>
+      </Section>
+
+      {/* ═══ ECOSYSTEM ═══ */}
+      <Section band labelledBy="ecosystem-heading">
+        <ScrollReveal>
+          <SectionHeader
+            id="ecosystem-heading"
+            eyebrow="The Yeshara Ecosystem"
+            title={
+              <>
+                Infrastructure connecting <span className="tq">real-world assets</span> with
+                digital financial systems.
+              </>
+            }
+            lead="Select a participant to see what it contributes and what it receives."
+          />
+        </ScrollReveal>
+        <EcosystemDiagram />
+      </Section>
+
+      {/* ═══ FAQ ═══ */}
+      <Section labelledBy="faq-heading" id="faq">
+        <ScrollReveal>
+          <SectionHeader
+            id="faq-heading"
+            eyebrow="Questions"
+            title={
+              <>
+                The things people <span className="tq">actually ask</span>.
+              </>
+            }
+          />
+        </ScrollReveal>
+        <FaqAccordion items={FAQ} />
+        <FaqJsonLd
+          items={FAQ.map((f) => ({ question: f.question, answer: f.answer }))}
+        />
+      </Section>
+
+      <ClosingCta />
     </>
   );
 }
