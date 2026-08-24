@@ -58,7 +58,7 @@ export async function PartnerBelt() {
                 key={category.id}
                 className="flex min-h-[88px] w-[224px] flex-col items-center justify-center gap-1.5 break-words rounded-card border border-dashed border-border-2 bg-surface p-s4 text-center font-mono text-[.72rem] font-medium leading-[1.45] tracking-[.06em] text-tx-3 transition-[border-color,color,background-color] duration-[250ms] hover:border-tq-500/35 hover:bg-surface-2 hover:text-tq-500"
               >
-                <em className="text-[.66rem] not-italic tracking-[.14em] text-tx-4">
+                <em className="text-[.66rem] not-italic tracking-[.14em] text-tx-3">
                   [{String(index + 1).padStart(2, "0")}]
                 </em>
                 <span>{category.label.toUpperCase()}</span>

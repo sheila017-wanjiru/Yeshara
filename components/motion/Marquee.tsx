@@ -31,6 +31,11 @@ export function Marquee({
       role="group"
       aria-label={ariaLabel}
       data-print="hide"
+      // Under prefers-reduced-motion the lane becomes a horizontally
+      // scrollable strip. A scrollable region has to be reachable by
+      // keyboard so it can be arrow-scrolled, which is why this carries
+      // a tab stop and an accessible name.
+      tabIndex={0}
     >
       <div
         className="marquee-track"
