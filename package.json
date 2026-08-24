@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "verify:ssr": "bash scripts/verify-ssr.sh",
     "verify:a11y": "node scripts/a11y.mjs",
-    "verify:print": "node scripts/print-check.mjs"
+    "verify:print": "node scripts/print-check.mjs",
+    "verify:lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
     "next": "^15.5.23",
@@ -27,6 +28,7 @@
     "@types/pg": "^8.23.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
+    "lighthouse": "^13.4.1",
     "playwright": "^1.62.1",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",

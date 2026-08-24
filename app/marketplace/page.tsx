@@ -3,11 +3,10 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/layout/PageHero";
 import { Section, Wrap } from "@/components/primitives/Section";
 import { ButtonLink } from "@/components/primitives/Button";
-import { AssetCard, EmptyState } from "@/components/marketplace/AssetCard";
+import { AssetBrowser } from "@/components/marketplace/AssetBrowser";
 import { ClosingCta } from "@/components/layout/ClosingCta";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { getAssets, ASSET_CLASS_FILTERS } from "@/lib/content/assets";
-import type { AssetClass } from "@/lib/content/types";
+import { getAssets } from "@/lib/content/assets";
 
 export const metadata = buildMetadata({
   title: "Asset Marketplace — tokenized real estate and instruments",
@@ -16,18 +15,14 @@ export const metadata = buildMetadata({
   path: "/marketplace",
 });
 
-export default async function MarketplacePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ class?: string }>;
-}) {
-  const params = await searchParams;
-  const selected = ASSET_CLASS_FILTERS.find((f) => f.id === params.class)
-    ?? ASSET_CLASS_FILTERS[0];
-
-  const assets = await getAssets({
-    assetClass: selected.value as AssetClass | undefined,
-  });
+/**
+ * Static by design. Reading searchParams here would make the route
+ * dynamic, and Next streams metadata for dynamic routes into the body
+ * rather than the head — which left this page's meta description
+ * outside <head> entirely. Filtering moved into AssetBrowser.
+ */
+export default async function MarketplacePage() {
+  const assets = await getAssets();
 
   return (
     <>
@@ -47,46 +42,7 @@ export default async function MarketplacePage({
         </h2>
 
         <div className="overflow-hidden rounded-[20px] border border-border-1 bg-[linear-gradient(180deg,#0C1617_0%,#04090A_100%)] shadow-[inset_0_1px_0_rgba(166,225,226,.06)]">
-          {/* Category filter as real links, not client state: filtering
-              works with JavaScript disabled and each view is linkable. */}
-          <nav
-            aria-label="Filter by asset class"
-            className="flex flex-wrap items-center gap-s4 border-b border-border-1 p-s4 sm:px-s5"
-          >
-            <div className="flex flex-wrap gap-1">
-              {ASSET_CLASS_FILTERS.map((filter) => {
-                const active = filter.id === selected.id;
-                return (
-                  <Link
-                    key={filter.id}
-                    href={filter.id === "all" ? "/marketplace" : `/marketplace?class=${filter.id}`}
-                    aria-current={active ? "page" : undefined}
-                    className={`flex h-[34px] items-center rounded-[10px] border px-[15px] font-display text-[.8125rem] font-semibold transition-all duration-200 ${
-                      active
-                        ? "border-tq-500/35 bg-tq-500/[.07] text-tq-300"
-                        : "border-transparent text-tx-2 hover:bg-white/[.045] hover:text-tx"
-                    }`}
-                  >
-                    {filter.label}
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="flex-1" />
-            <p className="mono text-tx-3">
-              {assets.length} {assets.length === 1 ? "listing" : "listings"}
-            </p>
-          </nav>
-
-          {assets.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <div className="grid gap-px bg-border-1 sm:grid-cols-2 lg:grid-cols-3">
-              {assets.map((asset) => (
-                <AssetCard key={asset.slug} asset={asset} />
-              ))}
-            </div>
-          )}
+          <AssetBrowser assets={assets} />
 
           <div className="flex flex-wrap items-center justify-between gap-s4 border-t border-border-1 p-s4 sm:px-s5">
             <p className="sm text-tx-3">

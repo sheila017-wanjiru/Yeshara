@@ -1,11 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Chip } from "@/components/primitives/Chip";
 
 const CELL_COUNT = 54;
 const TOTAL_TOKENS = 10_000;
 const CYCLE_MS = 9_000;
+/** How long the grid takes to fill, matched by the CSS stagger below. */
+const FILL_MS = 1_836;
+/** Counter updates across that window. 18 renders of a two-node leaf,
+ *  where the previous implementation did 54 of the whole figure. */
+const COUNT_STEPS = 18;
+/** Stable cell indices, built once at module scope. */
+const CELLS = Array.from({ length: CELL_COUNT }, (_, i) => i);
 
 /**
  * The hero visual: an asset is structured, tokenized and listed, with
@@ -34,7 +41,7 @@ export function TokenizationPipeline() {
       return;
     }
 
-    let cellTimer: ReturnType<typeof setInterval> | undefined;
+    let countTimer: ReturnType<typeof setInterval> | undefined;
     const timeouts: ReturnType<typeof setTimeout>[] = [];
 
     const runCycle = () => {
@@ -42,16 +49,19 @@ export function TokenizationPipeline() {
       setFilled(0);
       timeouts.push(
         setTimeout(() => {
+          // One state change starts every cell. The stagger is CSS
+          // transition-delay, so the browser sequences the fill rather
+          // than React re-rendering 54 nodes 54 times.
           setPhase(1);
-          cellTimer = setInterval(() => {
-            setFilled((n) => {
-              if (n >= CELL_COUNT) {
-                if (cellTimer) clearInterval(cellTimer);
-                return CELL_COUNT;
-              }
-              return n + 1;
-            });
-          }, 34);
+          // The counter still has to step, but it is isolated in its own
+          // leaf component, so each tick updates two text nodes.
+          let step = 0;
+          countTimer = setInterval(() => {
+            step += 1;
+            const done = step >= COUNT_STEPS;
+            setFilled(done ? CELL_COUNT : Math.round((step / COUNT_STEPS) * CELL_COUNT));
+            if (done && countTimer) clearInterval(countTimer);
+          }, FILL_MS / COUNT_STEPS);
         }, 1400),
       );
       timeouts.push(setTimeout(() => setPhase(2), 4200));
@@ -62,7 +72,7 @@ export function TokenizationPipeline() {
 
     return () => {
       clearInterval(loop);
-      if (cellTimer) clearInterval(cellTimer);
+      if (countTimer) clearInterval(countTimer);
       for (const t of timeouts) clearTimeout(t);
     };
   }, []);
@@ -132,18 +142,7 @@ export function TokenizationPipeline() {
           <span>02 — Digitization</span>
           <b className="font-medium text-tq-300">{percent}%</b>
         </div>
-        <div className="mt-s4 flex flex-wrap gap-1" aria-hidden="true">
-          {Array.from({ length: CELL_COUNT }, (_, i) => (
-            <span
-              key={i}
-              className={`h-[11px] w-[11px] rounded-[3px] border transition-[background-color,border-color,box-shadow] duration-300 ${
-                i < filled
-                  ? "border-tq-300 bg-tq-500 shadow-[0_0_8px_rgba(82,184,188,.5)]"
-                  : "border-border-2"
-              }`}
-            />
-          ))}
-        </div>
+        <TokenGrid on={phase >= 1 || reduced} />
         <div className="mono mt-s4 flex items-baseline justify-between border-t border-border-1 pt-s3">
           <span className="text-tx-3">Tokens minted · Register of Members</span>
           {/* tq-200 — display figures only */}
@@ -174,6 +173,29 @@ export function TokenizationPipeline() {
     </figure>
   );
 }
+
+/**
+ * The 54 token cells. Rendered once and never re-rendered: memo plus a
+ * single boolean prop means React touches this subtree only when the
+ * phase flips, and the staggered fill is pure CSS.
+ */
+const TokenGrid = memo(function TokenGrid({ on }: { on: boolean }) {
+  return (
+    <div
+      className="mt-s4 flex flex-wrap gap-1"
+      aria-hidden="true"
+      data-filling={on ? "true" : "false"}
+    >
+      {CELLS.map((i) => (
+        <span
+          key={i}
+          className="token-cell"
+          style={{ transitionDelay: `${i * 34}ms` }}
+        />
+      ))}
+    </div>
+  );
+});
 
 function Connector({ delay = "0s" }: { delay?: string }) {
   return (

@@ -239,6 +239,26 @@ html[data-js="on"] .rv.in{opacity:1;transform:none}
 }
 .pipe-drop{animation:yesh-drop 2.6s cubic-bezier(.5,0,.5,1) infinite}
 
+/* Hero pipeline token cells.
+   The fill is staggered with per-cell transition-delay and driven by a
+   single data attribute on the grid, so lighting all 54 cells costs one
+   React render instead of 54. The browser does the sequencing. */
+.token-cell{
+  height:11px;width:11px;border-radius:3px;
+  border:1px solid var(--border-2);background:transparent;
+  transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+[data-filling="true"] .token-cell{
+  background:var(--tq-500);
+  border-color:var(--tq-300);
+  box-shadow:0 0 8px rgba(82,184,188,.5);
+}
+/* With motion reduced the grid renders already filled and the stagger
+   is removed, so nothing animates and no information is lost. */
+@media (prefers-reduced-motion:reduce){
+  .token-cell{transition:none !important;transition-delay:0ms !important}
+}
+
 @keyframes yesh-dash{to{stroke-dashoffset:-160}}
 .eco-link{animation:yesh-dash 24s linear infinite}
 
