@@ -46,7 +46,7 @@ when nothing was written is the worst failure mode a contact form has.
 
 ## Verifying it
 
-Three suites, each runnable against a running production server.
+Five suites, each runnable against a running production server.
 
 ```bash
 npm run build && npm start &
@@ -112,7 +112,7 @@ lib/
   content/              typed content accessors — the CMS seam
   db.ts mailer.ts       persistence and transactional email
 sanity/schemas/         schemas for the Studio (not wired yet)
-scripts/                schema.sql and the three verification suites
+scripts/                schema.sql and the five verification suites
 ```
 
 ### Design tokens
